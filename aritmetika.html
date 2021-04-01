@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aritmeticke Operacije 3</title>
+
+    <style>
+        * {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            background-color: #1D2228;
+            display: flex;
+            align-items: center;
+        }
+
+        .mainWrapper {
+            width: 30%;
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            margin: auto;
+            justify-content: space-evenly;
+            align-items: baseline;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .terrible {
+            width: 100%;
+            display: flex;
+        }
+
+        .inputWrap {
+            text-align: center;
+            width: 100%;
+            padding: 15px;
+        }
+
+        .inputValues {
+            /*margin: 15px;*/
+            width: 100px;
+            height: 100px;
+            color: #fff;
+            border: 1px solid #FB8122;
+            background-color: transparent;
+            box-sizing: border-box;
+            margin: 15px 0;
+            font-size: 24px;
+            border-radius: 100%;
+            text-align: center;
+            text-overflow: ellipsis;
+        }
+
+        .inputValues:focus {
+            outline: none;
+        }
+
+        #num1,
+        #num2 {
+            border: 1px solid #4AC9F0;
+        }
+
+        #num1:focus,
+        #num2:focus {
+            box-shadow: 0 0px 36px 13px #67c7e4;
+            transition: .3s;
+        }
+
+        #operator:focus {
+            box-shadow: 0 0px 36px 13px #FB8122;
+            transition: .3s;
+        }
+
+        /* this code removes arrows from input in Chrome */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+
+        label {
+            color: #fff;
+        }
+
+        #calculate {
+            width: 300px;
+            background-color: transparent;
+            font-size: 24px;
+            padding: 9px 0;
+            transition: .3s;
+            color: #fff;
+            border: 1px solid #F039FF;
+            border-radius: 15px;
+        }
+
+        #calculate:hover {
+            cursor: pointer;
+            background-color: #F039FF;
+            transition: .3s;
+            box-shadow: 0 0px 33px 13px #6e1a75;
+        }
+
+        #calculate:focus {
+            outline: none;
+        }
+
+        #calculate:active {
+            background-color: transparent;
+            outline-style: none;
+            outline: none;
+            transition: .3s;
+        }
+
+        #finalResult {
+            color: #fff;
+            font-size: 36px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mainWrapper">
+        <div class="wrapper">
+            <div class="terrible">
+                <div class="inputWrap">
+                    <label for="num1">Number 1</label>
+                    <input id="num1" type="number" class="inputValues">
+                </div>
+                <div class="inputWrap">
+                    <label for="operator">Operator</label>
+                    <input id="operator" maxlength="1" type="text" class="inputValues" />
+                </div>
+                <div class="inputWrap">
+                    <label for="num2">Number 1</label>
+                    <input id="num2" type="number" class="inputValues">
+                </div>
+            </div>
+            <p id="finalResult">NaN</p>
+        </div>
+
+        <input type="button" id="calculate" value="Calculate" onclick="calculateValue()">
+    </div>
+
+    <script type="text/javascript">
+
+        /* CODE "POZAJMLJEN" SA SO */
+        let operator = document.querySelector('#operator');
+        const rx = /[\(\) \+\-\*\/\.]/;
+        operator.addEventListener('input', () => {
+            if (!rx.test(operator.value)) {
+                operator.value = ""
+            }
+        });
+
+        function calculateValue() {
+            let num1Value = document.getElementById("num1").value;
+            let num1Parse = parseInt(num1Value);
+
+            let num2Value = document.getElementById("num2").value;
+            let num2Parse = parseInt(num2Value);
+
+            let operatorValue = document.getElementById("operator").value;
+
+            var result;
+
+            let ternaryCalc =
+                operatorValue == "+" ? result = num1Parse + num2Parse :
+                    operatorValue == "-" ? result = num1Parse - num2Parse :
+                        operatorValue == "*" ? result = num1Parse * num2Parse :
+                            operatorValue == "/" ? result = num1Parse / num2Parse :
+                                "No value because - aliens.";
+
+            let updatePageResult = document.getElementById("finalResult");
+            updatePageResult.innerHTML = ternaryCalc;
+            
+                                /*
+            if (operatorValue === "+") {
+                result = num1Parse + num2Parse;
+            } else if (operatorValue === "-") {
+                result = num1Parse - num2Parse;
+            } else if (operatorValue === "*") {
+                result = num1Parse * num2Parse;
+            } else if (operatorValue === "/") {
+                result = num1Parse / num2Parse;
+            } else {
+                result = "no calculetion because..."
+            }
+            */
+            console.log(result);
+
+        }
+
+    </script>
+</body>
+
+</html>
